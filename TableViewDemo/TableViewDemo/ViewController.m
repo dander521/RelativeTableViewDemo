@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "RCTableView.h"
 
-@interface ViewController ()
+@interface ViewController ()<RCTableViewDelegate>
 
 @end
 
@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 
@@ -27,8 +28,13 @@
 }
 
 - (IBAction)touchShowBtm:(id)sender {
-    RCTableView *relativeTab = [RCTableView shareInstanceManager];
+    RCTableView *relativeTab = [RCTableView shareInstanceManagerWithType:RCTableViewTypeAllLocation];
+    relativeTab.delegate = self;
     [relativeTab show];
+}
+
+- (void)touchTableWithType:(RCTableViewType)tableType content:(NSArray *)content {
+    NSLog(@"tableType = %zd, content = %@", tableType, content);
 }
 
 @end

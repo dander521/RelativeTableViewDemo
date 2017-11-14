@@ -8,9 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, RCTableViewType) {
+    RCTableViewTypeAllCategory,
+    RCTableViewTypeAllLocation,
+    RCTableViewTypeAuto
+};
+
+@protocol RCTableViewDelegate <NSObject>
+
+- (void)touchTableWithType:(RCTableViewType)tableType content:(NSArray *)content;
+
+@end
+
 @interface RCTableView : UIView
 
-+ (instancetype)shareInstanceManager;
+/** <#description#> */
+@property (nonatomic, assign) RCTableViewType tableType;
+
+/** <#description#> */
+@property (nonatomic, assign) id <RCTableViewDelegate> delegate;
+
++ (instancetype)shareInstanceManagerWithType:(RCTableViewType)type;
 
 - (void)show;
 
